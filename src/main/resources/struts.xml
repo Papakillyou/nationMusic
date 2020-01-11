@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+        "http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+
+    <constant name="struts.devMode" value="false"/>
+    <constant name="struts.objectFactory" value="spring" />
+
+    <package name="user" namespace="/user" extends="struts-default">
+        <action name="user_*" class="userAction" method="{1}">
+            <result name="show_view" type="chain">
+                <param name="actionName">music_showMusic</param>
+                <param name="namespace">/music</param>
+                <param name="param1">${user.username}</param>
+            </result>
+
+            <result name="success">/success.jsp</result>
+            <result name="error">/error.jsp</result>
+            <result name="regsuccess">/regsuccess.jsp</result>
+        </action>
+
+    </package>
+
+    <package name="music" namespace="/music" extends="struts-default">
+        <action name="music_*" class="musicAction" method="{1}">
+            <result name="addmessage">/addmessage.jsp</result>
+            <!--<result name="show_view">/show_music.jsp</result>-->
+            <result name="show_view">/show_music.jsp</result>
+            <result name="detail_view">/detail.jsp</result>
+            <result name="edit_view">/edit.jsp</result>
+            <result name="delete_message">/delete_message.jsp</result>
+            <result name="edit_message">/edit_message.jsp</result>
+            <result name="add_view">/add_music.jsp</result>
+        </action>
+
+    </package>
+
+    <package name="songlist" namespace="/songlist" extends="struts-default">
+        <action name="songlist_*" class="SongListAction" method="{1}">
+            <result name="addsonglist_message">/addsonglist_message.jsp</result>
+            <result name="songlist">/songlist.jsp</result>
+            <result name="delete_songList">/delete_songList.jsp</result>
+            <result name="error">/error.jsp</result>
+            <result name="addsonglist_view">/addSongList.jsp</result>
+
+        </action>
+
+    </package>
+
+    <package name="order" namespace="/order" extends="struts-default">
+        <action name="order_*" class="OrderAction" method="{1}">
+            <result name="showSongsFromSongList">/showSongsFromSongList.jsp</result>
+            <result name="showListToAdd">/showListToAdd.jsp</result>
+            <result name="addOrder_message">/addOrder_message.jsp</result>
+            <result name="delOrder_message">/delOrder_message.jsp</result>
+            <result name="nologin">/nologin.jsp</result>
+
+        </action>
+    </package>
+
+    <!-- 配置总文件大小 maxSize>=maximumSize -->
+    <constant name="struts.multipart.maxSize" value="78827619"/>
+    <constant name="struts.multipart.saveDir" value="/tmp"></constant>
+</struts>

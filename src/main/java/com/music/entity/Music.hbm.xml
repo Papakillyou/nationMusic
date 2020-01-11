@@ -1,0 +1,33 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="com.music.entity.Music" table="music" schema="nationmusic">
+        <id name="musicid">
+            <column name="musicid" sql-type="int(11)"/>
+        </id>
+        <property name="title">
+            <column name="title" sql-type="varchar(255)"/>
+        </property>
+        <property name="singer">
+            <column name="singer" sql-type="varchar(255)"/>
+        </property>
+        <property name="summary">
+            <column name="summary" sql-type="varchar(255)"/>
+        </property>
+        <property name="path">
+            <column name="path" sql-type="varchar(255)"/>
+        </property>
+        <property name="nation">
+            <column name="nation" sql-type="varchar(30)" length="30"/>
+        </property>
+        <set name="ordersByMusicid" inverse="true">
+            <key>
+                <column name="music"/>
+            </key>
+            <one-to-many not-found="ignore" class="com.music.entity.Order"/>
+        </set>
+    </class>
+</hibernate-mapping>

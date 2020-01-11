@@ -1,0 +1,24 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="com.music.entity.Songlist" table="songlist" schema="nationmusic">
+        <id name="listid">
+            <column name="listid" sql-type="int(11)"/>
+        </id>
+        <property name="listname">
+            <column name="listname" sql-type="varchar(255)"/>
+        </property>
+        <many-to-one name="userByUser" class="com.music.entity.User">
+            <column name="user"/>
+        </many-to-one>
+        <set name="ordersByListid" inverse="true">
+            <key>
+                <column name="list"/>
+            </key>
+            <one-to-many not-found="ignore" class="com.music.entity.Order"/>
+        </set>
+    </class>
+</hibernate-mapping>
